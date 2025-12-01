@@ -15,20 +15,13 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Unified scroll handler
-window.addEventListener('scroll', () => {
-    // Header shrink on scroll
-    const header = document.querySelector('header');
-    if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
-    }
-
+function checkAnimations() {
+    const windowHeight = window.innerHeight;
+    
     // About section fade-in animation
     const aboutSection = document.querySelector('.about-section');
     if (aboutSection) {
         const rect = aboutSection.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
         if (rect.top < windowHeight * 0.75) {
             aboutSection.classList.add('visible');
         }
@@ -38,11 +31,32 @@ window.addEventListener('scroll', () => {
     const storyBox = document.querySelector('.story-box');
     if (storyBox) {
         const rect = storyBox.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
         if (rect.top < windowHeight * 0.8) {
             storyBox.classList.add('visible');
         }
     }
+
+    // Reliability section fade-in animation
+    const reliabilitySection = document.querySelector('.reliability-section');
+    if (reliabilitySection) {
+        const rect = reliabilitySection.getBoundingClientRect();
+        if (rect.top < windowHeight * 0.8) {
+            reliabilitySection.classList.add('visible');
+        }
+    }
+}
+
+window.addEventListener('scroll', () => {
+    // Header shrink on scroll
+    const header = document.querySelector('header');
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+
+    // Check all animations
+    checkAnimations();
 
     // Active navigation highlighting
     const sections = document.querySelectorAll('section[id]');
