@@ -1,18 +1,19 @@
 // Main JavaScript file for SI.MA Restyling
 
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
+// Smooth scrolling for navigation links (only for anchor links within the same page)
+// DISABLED to fix navigation issues
+// document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
+//     anchor.addEventListener('click', function (e) {
+//         e.preventDefault();
+//         const target = document.querySelector(this.getAttribute('href'));
+//         if (target) {
+//             target.scrollIntoView({
+//                 behavior: 'smooth',
+//                 block: 'start'
+//             });
+//         }
+//     });
+// });
 
 // Unified scroll handler
 function checkAnimations() {
@@ -51,6 +52,15 @@ function checkAnimations() {
         const rect = blueBox.getBoundingClientRect();
         if (rect.top < windowHeight * 0.8) {
             blueBox.classList.add('visible');
+        }
+    }
+
+    // Map animation for contatti page
+    const mapLink = document.querySelector('.mappa-link');
+    if (mapLink) {
+        const rect = mapLink.getBoundingClientRect();
+        if (rect.top < windowHeight * 0.8) {
+            mapLink.classList.add('visible');
         }
     }
 }
@@ -114,6 +124,34 @@ window.addEventListener('scroll', () => {
 window.addEventListener('load', () => {
     checkAnimations();
 });
+
+// Copy to clipboard function for contact cards
+function copyToClipboard(text, element) {
+    navigator.clipboard.writeText(text).then(() => {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = 'copy-notification';
+        notification.textContent = 'Copiato';
+        
+        // Add notification to the card
+        element.appendChild(notification);
+        
+        // Show notification
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 10);
+        
+        // Remove notification after 1.5 seconds
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                element.removeChild(notification);
+            }, 300);
+        }, 1500);
+    }).catch(err => {
+        console.error('Errore nella copia: ', err);
+    });
+}
 
 // Console message
 console.log('SI.MA Restyling - Website initialized');

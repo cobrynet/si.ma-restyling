@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>SI.MA - Contatti</title>
+    <link rel="stylesheet" href="css/style.css?v=<?php echo time(); ?>">
+    <script src="js/main.js?v=<?php echo time(); ?>" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/SVG/si.ma-logobianco.svg" alt="SI.MA Logo">
+                </a>
+            </div>
+            <nav>
+                <a href="index.html">HOME</a>
+                <a href="servizi.html">SERVIZI</a>
+                <a href="nuovo-usato.html">NUOVO USATO</a>
+                <a href="contatti.html" class="active">CONTATTI</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="contatti-container">
+            <h1 class="contatti-title">CONTATTI</h1>
+            
+            <h2 class="contatti-subtitle">Contatti Diretti</h2>
+            
+            <div class="contatti-cards">
+                <div class="contatto-card" onclick="copyToClipboard('info@assistenzalavanderie.it', this)">info@assistenzalavanderie.it</div>
+                <div class="contatto-card" onclick="copyToClipboard('055 732 7456', this)">055 732 7456</div>
+                <div class="contatto-card" onclick="copyToClipboard('Via Stefano Ussi 22, Scandicci (FI) 50018', this)">Via Stefano Ussi 22<br>Scandicci (FI) 50018</div>
+            </div>
+            
+            <a href="https://www.google.com/maps/place/Via+Stefano+Ussi,+22,+50018+Scandicci+FI/@43.7536989,11.1960724,17z/data=!3m1!4b1!4m6!3m5!1s0x132a50e777937643:0xafde5b6671473d76!8m2!3d43.7536951!4d11.1986473!16s%2Fg%2F11b8v6_c0b!5m2!1e4!1e2?entry=ttu&g_ep=EgoyMDI1MTEzMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="mappa-link fade-in-on-scroll">
+                <div class="mappa">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2882.558!2d11.1960724!3d43.7536989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132a50e777937643%3A0xafde5b6671473d76!2sVia%20Stefano%20Ussi%2C%2022%2C%2050018%20Scandicci%20FI!5e0!3m2!1sit!2sit!4v1733234567890!5m2!1sit!2sit" width="100%" height="100%" style="border:0; border-radius: 25px; pointer-events: none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </a>
+            
+            <h2 class="form-title">Invia una mail al dipartimento desiderato</h2>
+            
+            <form class="contatti-form">
+                <div class="form-group-full">
+                    <label>Seleziona dipartimento*</label>
+                    <div class="dipartimenti">
+                        <button type="button" class="dipartimento-btn">AMMINISTRAZIONE</button>
+                        <button type="button" class="dipartimento-btn">COMMERCIALE</button>
+                        <button type="button" class="dipartimento-btn">ASSISTENZA</button>
+                    </div>
+                </div>
+                
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label>Nome completo*</label>
+                        <input type="text" placeholder="Nome e Cognome">
+                    </div>
+                    <div class="form-group">
+                        <label>Email*</label>
+                        <input type="email" placeholder="Inserisci la tua mail">
+                    </div>
+                </div>
+                
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label>Telefono*</label>
+                        <input type="tel" placeholder="Nome e Cognome">
+                    </div>
+                    <div class="form-group">
+                        <label>Organizzazione</label>
+                        <input type="text" placeholder="Inserisci la tua mail">
+                    </div>
+                </div>
+                
+                <div class="form-group-full">
+                    <label>Messaggio*</label>
+                    <textarea placeholder="Il tuo messaggio"></textarea>
+                </div>
+                
+                <button type="submit" class="btn-submit">INVIA EMAIL</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-divider"></div>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="images/SVG/si.ma-logo.svg" alt="SI.MA Logo">
+                <div class="footer-links">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#cookie">Cookie Policy</a>
+                    <p class="footer-credits">Design by Cobrynet</p>
+                </div>
+            </div>
+            <div class="footer-contacts">
+                <h4>CONTATTI</h4>
+                <p>Via Stefano Ussi 22<br>Scandicci (FI) 50018</p>
+                <p>Tel. 055 7327456</p>
+                <p>info@assistenzalavanderie.it</p>
+                <p>www.assistenzalavanderie.it</p>
+                <p>P.IVA 01867350975</p>
+            </div>
+            <div class="footer-hours">
+                <h4>ORARI</h4>
+                <p>Lun - Ven</p>
+                <p>09:00- 18:00</p>
+                <p class="emergency">Emergenze</p>
+                <p>24/7</p>
+            </div>
+            <div class="footer-reviews">
+                <h4>LA TUA OPINIONE CONTA</h4>
+                <div class="stars">
+                    <span>★</span>
+                    <span>★</span>
+                    <span>★</span>
+                    <span>★</span>
+                    <span>★</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
