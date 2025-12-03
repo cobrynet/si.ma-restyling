@@ -44,6 +44,15 @@ function checkAnimations() {
             reliabilitySection.classList.add('visible');
         }
     }
+
+    // Blue box animation for nuovo-usato page
+    const blueBox = document.querySelector('.blue-box');
+    if (blueBox) {
+        const rect = blueBox.getBoundingClientRect();
+        if (rect.top < windowHeight * 0.8) {
+            blueBox.classList.add('visible');
+        }
+    }
 }
 
 window.addEventListener('scroll', () => {
@@ -99,6 +108,11 @@ window.addEventListener('scroll', () => {
                 console.log('Van translateX:', translateX + 'vw', 'Progress:', effectiveProgress);
         }
     }
+});
+
+// Check animations on page load
+window.addEventListener('load', () => {
+    checkAnimations();
 });
 
 // Console message

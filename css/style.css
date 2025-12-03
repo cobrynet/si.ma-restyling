@@ -943,6 +943,14 @@ footer {
     text-align: center;
     box-sizing: border-box;
     min-height: clamp(200px, 22vw, 380px);
+    opacity: 0;
+    transform: translateX(-50%) translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.blue-box.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
 }
 
 .valore-nuovo {
