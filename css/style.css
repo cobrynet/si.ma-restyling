@@ -1,3 +1,8 @@
+header nav a.active {
+    color: #81AEE0;
+    font-weight: 400;
+    text-decoration: none;
+}
 /* Sposta solo icona-3.svg di 10px a destra nella card Macchinari */
 /* Reset e Base */
 * {
@@ -559,6 +564,7 @@ main {
     padding: clamp(25px, 2.3vw, 40px) clamp(30px, 2.8vw, 48px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     z-index: 2;
+    transition: box-shadow 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
 .project-text-box p {
@@ -567,6 +573,14 @@ main {
     line-height: 1.18;
     color: var(--primary-color);
     margin: 0;
+}
+
+.project-text-box:hover {
+    box-shadow: 0 0 24px 8px #81AEE0, 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.project-text-box:hover p {
+    /* nessuna modifica interna, solo glow esterno */
 }
 
 .process-section {
@@ -660,16 +674,14 @@ footer {
 }
 
 .footer-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: stretch;
-    gap: clamp(20px, 3.5vw, 80px);
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1.2fr;
+    align-items: start;
     max-width: 1462px;
     width: 90%;
     margin: 0 auto clamp(40px, 5.2vw, 90px);
     padding: 0;
-    flex-wrap: nowrap;
+    gap: clamp(20px, 3.5vw, 80px);
 }
 
 .footer-logo {
@@ -727,24 +739,27 @@ footer {
 }
 
 .footer-hours {
-    min-width: 120px;
+    min-width: 170px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     text-align: left;
+    margin-left: 0;
     margin-left: clamp(30px, 4vw, 80px);
 }
 
 .footer-reviews {
-    min-width: 100px;
-    max-width: 180px;
+    width: 90%;
+    max-width: 1462px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     text-align: center;
-    margin-left: clamp(30px, 4vw, 80px);
 }
 
 .footer-contacts h4,
@@ -821,12 +836,16 @@ footer {
     
     .footer-hours {
         min-width: 100px;
-        margin-left: clamp(20px, 3vw, 40px);
+        /* margin-left removed to ensure visibility across all sizes */
     }
     
     .footer-reviews {
-        min-width: 90px;
-        max-width: 140px;
+        width: 100%;
+        max-width: 100vw;
+        margin: 0 auto;
+        box-sizing: border-box;
+        padding-left: clamp(10px, 2vw, 20px);
+        padding-right: clamp(10px, 2vw, 20px);
         margin-left: clamp(20px, 3vw, 40px);
     }
     
@@ -880,6 +899,11 @@ footer {
         white-space: normal;
     }
     
+    .footer-hours .emergency {
+        text-align: center;
+        margin-top: clamp(12px, 2vw, 16px);
+    }
+    
     .footer-reviews h4 {
         font-size: 16px;
         line-height: 20px;
@@ -889,3 +913,244 @@ footer {
         margin-bottom: 20px;
     }
 }
+
+/* Nuovo Usato Page */
+.contenitore-nuovousato {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    height: auto;
+    min-height: 1100px;
+    margin: 180px auto 120px auto;
+    padding: 0;
+}
+
+.blue-box {
+    position: absolute;
+    width: min(90%, 1115px);
+    left: 50%;
+    transform: translateX(-50%);
+    top: 730px;
+    background: #81AEE0;
+    border-radius: clamp(16px, 2.2vw, 25px);
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(8px, 1.8vw, 24px);
+    padding: clamp(16px, 3vw, 48px);
+    text-align: center;
+    box-sizing: border-box;
+    min-height: clamp(200px, 22vw, 380px);
+}
+
+.valore-nuovo {
+    position: absolute;
+    width: clamp(300px, 35%, 480px);
+    height: auto;
+    left: 5%;
+    top: -50px;
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 500;
+    font-size: clamp(40px, 5vw, 80px);
+    line-height: 1.16;
+    color: #204072;
+    z-index: 2;
+}
+
+.contenitore-oblo {
+    position: absolute;
+    width: clamp(220px, 22vw, 420px);
+    height: clamp(160px, 16vw, 300px);
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    border-radius: 50%;
+    z-index: 3;
+    overflow: hidden;
+}
+
+.contenitore-oblo video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Responsive adjustments for oblo size */
+@media (max-width: 768px) {
+    .contenitore-oblo {
+        width: clamp(180px, 40vw, 280px);
+        height: clamp(120px, 28vw, 200px);
+    }
+}
+
+@media (min-width: 1440px) {
+    .contenitore-oblo {
+        width: clamp(280px, 24vw, 520px);
+        height: clamp(200px, 18vw, 360px);
+    }
+}
+
+.fiducia-usato {
+    position: absolute;
+    width: clamp(300px, 35%, 480px);
+    height: auto;
+    right: 5%;
+    top: 100px;
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 500;
+    font-size: clamp(40px, 5vw, 80px);
+    line-height: 1.16;
+    text-align: right;
+    color: #81AEE0;
+    z-index: 2;
+}
+
+.prestazioni {
+    position: absolute;
+    width: 90%;
+    max-width: 990px;
+    height: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 480px;
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 600;
+    font-size: clamp(28px, 3vw, 48px);
+    line-height: 1.2;
+    text-align: center;
+    color: #204072;
+    z-index: 1;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.affidabilita {
+    position: absolute;
+    width: 90%;
+    max-width: 1050px;
+    height: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 570px;
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(20px, 2vw, 32px);
+    line-height: 1.3;
+    text-align: center;
+    color: #204072;
+    z-index: 1;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.macchinari {
+    width: 90%;
+    max-width: 1000px;
+    height: auto;
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 600;
+    font-size: clamp(26px, 3.8vw, 48px);
+    line-height: 1.2;
+    text-align: center;
+    color: #FFFFFF;
+    z-index: 1;
+    padding: 0 30px;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.selezione {
+    width: 90%;
+    max-width: 1043px;
+    height: auto;
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(16px, 2.6vw, 30px);
+    line-height: 1.3;
+    text-align: center;
+    color: #FFFFFF;
+    z-index: 1;
+    padding: 0 30px;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+@media (max-width: 900px) {
+    .blue-box {
+        top: 550px;
+        padding: clamp(14px, 4vw, 40px);
+        min-height: clamp(180px, 28vw, 320px);
+    }
+    .macchinari {
+        font-size: clamp(22px, 4.8vw, 40px);
+    }
+    .selezione {
+        font-size: clamp(14px, 3.2vw, 24px);
+    }
+    .prestazioni {
+        top: 340px;
+    }
+    .affidabilita {
+        top: 400px;
+    }
+    .valore-nuovo {
+        top: -35px;
+    }
+    .contenitore-oblo {
+        top: 5px;
+    }
+    .fiducia-usato {
+        top: 85px;
+    }
+    .contenitore-nuovousato {
+        margin-top: 150px;
+        min-height: 800px;
+        margin-bottom: 80px;
+    }
+}
+
+@media (max-width: 600px) {
+    .blue-box {
+        top: 490px;
+        border-radius: clamp(14px, 4vw, 22px);
+        gap: clamp(6px, 1.6vw, 18px);
+        padding: clamp(12px, 3.5vw, 32px);
+        min-height: clamp(160px, 26vw, 280px);
+    }
+    .macchinari {
+        font-size: clamp(20px, 4.6vw, 36px);
+    }
+    .selezione {
+        font-size: clamp(12px, 3vw, 22px);
+    }
+    .prestazioni {
+        top: 310px;
+    }
+    .affidabilita {
+        top: 365px;
+    }
+    .valore-nuovo {
+        top: -25px;
+    }
+    .contenitore-oblo {
+        top: 10px;
+    }
+    .fiducia-usato {
+        top: 75px;
+    }
+    .contenitore-nuovousato {
+        margin-top: 140px;
+        min-height: 720px;
+        margin-bottom: 70px;
+    }
+}
+
