@@ -189,6 +189,21 @@ document.addEventListener('DOMContentLoaded', function() {
     menuLinks.forEach(link => {
         link.addEventListener('click', closeMenu);
     });
+
+    // Button click effect for "Richiedi assistenza"
+    const primaryButtons = document.querySelectorAll('.btn-primary, .mobile-btn-primary');
+    
+    primaryButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            // Add clicked class
+            this.classList.add('clicked');
+            
+            // Remove clicked class after animation
+            setTimeout(() => {
+                this.classList.remove('clicked');
+            }, 300);
+        });
+    });
 });
 
 // Console message

@@ -140,6 +140,7 @@ main {
 .cta-buttons {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: clamp(15px, 2vw, 30px);
     flex-wrap: wrap;
 }
@@ -158,30 +159,88 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 0.3s;
+    transition: all 0.3s ease;
     padding: 0 20px;
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes rotating-light {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotating-glow {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes glowing-border {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .btn-primary:hover {
     opacity: 0.9;
+    transform: scale(1.05);
 }
 
-.btn-secondary {
-    font-weight: 500;
-    font-size: clamp(16px, 1.16vw, 20px);
-    line-height: 25px;
-    text-transform: uppercase;
+.btn-primary:hover::before {
+    filter: blur(25px);
+    opacity: 1;
+}
+
+.btn-primary:active {
+    background: var(--secondary-color);
     color: var(--primary-color);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    border-bottom: 2px solid transparent;
-    transition: border-color 0.3s;
-    padding: 0 10px;
+    transform: scale(1.05);
 }
 
-.btn-secondary:hover {
-    border-bottom-color: var(--primary-color);
+.btn-primary.clicked {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    animation: pulse 0.3s ease;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+a.btn-secondary {
+    font-weight: 500 !important;
+    font-size: clamp(16px, 1.16vw, 20px) !important;
+    line-height: 25px !important;
+    text-transform: uppercase !important;
+    color: #204072 !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    border-bottom: 2px solid transparent !important;
+    transition: border-bottom 0.3s ease !important;
+}
+
+.cta-buttons a.btn-secondary:hover,
+a.btn-secondary:hover {
+    border-bottom: 2px solid #204072 !important;
 }
 
 /* About Section */
@@ -577,10 +636,6 @@ main {
 
 .project-text-box:hover {
     box-shadow: 0 0 24px 8px #81AEE0, 0 4px 20px rgba(0,0,0,0.1);
-}
-
-.project-text-box:hover p {
-    /* nessuna modifica interna, solo glow esterno */
 }
 
 .process-section {
@@ -1622,6 +1677,38 @@ footer {
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .mobile-btn-primary:active {
+        background: #81AEE0;
+        transform: translateX(-50%) scale(1.05);
+    }
+
+    .mobile-btn-primary:active .mobile-btn-primary-text {
+        color: #204072;
+    }
+
+    .mobile-btn-primary.clicked {
+        background: #81AEE0;
+        animation: pulse-mobile 0.3s ease;
+    }
+
+    .mobile-btn-primary.clicked .mobile-btn-primary-text {
+        color: #204072;
+    }
+
+    @keyframes pulse-mobile {
+        0% {
+            transform: translateX(-50%) scale(1);
+        }
+        50% {
+            transform: translateX(-50%) scale(1.05);
+        }
+        100% {
+            transform: translateX(-50%) scale(1);
+        }
     }
 
     /* Button text - "Richiedi assistenza" */
@@ -1648,10 +1735,16 @@ footer {
         font-size: clamp(12px, 3.8vw, 15px);
         font-family: Outfit;
         font-weight: 500;
-        text-decoration: underline;
+        text-decoration: none;
         text-transform: uppercase;
         word-wrap: break-word;
         z-index: 1;
+        cursor: pointer;
+        transition: text-decoration 0.2s ease;
+    }
+
+    .mobile-link-lavatrici:active {
+        text-decoration: underline;
     }
 
     /* Arrow/icon */
