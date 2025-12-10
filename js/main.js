@@ -153,5 +153,43 @@ function copyToClipboard(text, element) {
     });
 }
 
+// Mobile Side Menu Toggle
+document.addEventListener('DOMContentLoaded', function() {
+    const menuButton = document.querySelector('.mobile-menu-button');
+    const sideMenu = document.querySelector('.mobile-side-menu');
+    const closeButton = document.querySelector('.mobile-side-menu-close');
+    const overlay = document.querySelector('.mobile-side-menu-overlay');
+    const menuLinks = document.querySelectorAll('.mobile-menu-link');
+
+    // Open menu
+    if (menuButton) {
+        menuButton.addEventListener('click', function() {
+            sideMenu.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+        });
+    }
+
+    // Close menu function
+    function closeMenu() {
+        sideMenu.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+    }
+
+    // Close menu when clicking close button
+    if (closeButton) {
+        closeButton.addEventListener('click', closeMenu);
+    }
+
+    // Close menu when clicking overlay
+    if (overlay) {
+        overlay.addEventListener('click', closeMenu);
+    }
+
+    // Close menu when clicking a link
+    menuLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+});
+
 // Console message
 console.log('SI.MA Restyling - Website initialized');
