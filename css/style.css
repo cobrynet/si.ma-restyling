@@ -1538,7 +1538,7 @@ footer {
     body::before {
         content: '';
         width: 100%;
-        height: 1040px;
+        height: clamp(1040px, 128vw, 1060px);
         left: 0;
         top: 704px;
         position: absolute;
@@ -1758,6 +1758,9 @@ footer {
         z-index: 1;
         background: url('../images/SVG/angle-down-solid-full.svg') no-repeat center;
         background-size: contain;
+        cursor: pointer;
+        display: block;
+        text-decoration: none;
     }
 
     /* About title - "SI.MA. Il tuo partner..." */

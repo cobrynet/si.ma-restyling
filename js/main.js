@@ -1,19 +1,19 @@
 // Main JavaScript file for SI.MA Restyling
 
-// Smooth scrolling for navigation links (only for anchor links within the same page)
-// DISABLED to fix navigation issues
-// document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
-//     anchor.addEventListener('click', function (e) {
-//         e.preventDefault();
-//         const target = document.querySelector(this.getAttribute('href'));
-//         if (target) {
-//             target.scrollIntoView({
-//                 behavior: 'smooth',
-//                 block: 'start'
-//             });
-//         }
-//     });
-// });
+// Smooth scrolling for mobile arrow - scroll to end of white rectangle
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileArrow = document.querySelector('.mobile-arrow');
+    if (mobileArrow) {
+        mobileArrow.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Scroll to 830px from top (end of first white rectangle)
+            window.scrollTo({
+                top: 830,
+                behavior: 'smooth'
+            });
+        });
+    }
+});
 
 // Unified scroll handler
 function checkAnimations() {
@@ -202,6 +202,17 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 this.classList.remove('clicked');
             }, 300);
+        });
+    });
+
+    // Hover effect for btn-secondary links
+    const secondaryLinks = document.querySelectorAll('a.btn-secondary');
+    secondaryLinks.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            this.style.borderBottom = '2px solid #204072';
+        });
+        link.addEventListener('mouseleave', function() {
+            this.style.borderBottom = '2px solid transparent';
         });
     });
 });
