@@ -1563,7 +1563,7 @@ footer {
     }
 
     /* White background section */
-    body::after {
+    body:not(.contatti)::after {
         content: '';
         width: 100%;
         height: 840px;
