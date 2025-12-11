@@ -1,9 +1,9 @@
 /* Mostra solo mobile-container su mobile, nascondi desktop */
 @media (max-width: 1024px) {
     .mobile-container { 
-        display: block !important; 
-        border: 2px solid red !important;
-        background: #fffbe6 !important;
+        display: block !important;
+        width: 100%;
+        min-height: 100vh;
     }
     header, main, footer { display: none !important; }
 }
@@ -1548,8 +1548,8 @@ footer {
         padding-bottom: 180px;
     }
 
-    /* Blue background section */
-    body::before {
+    /* Blue background section - SOLO per index.html */
+    body.home::before {
         content: '';
         width: 100%;
         height: clamp(1040px, 128vw, 1060px);
