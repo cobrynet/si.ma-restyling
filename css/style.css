@@ -2171,10 +2171,8 @@ footer {
     .mobile-footer-star-3,
     .mobile-footer-star-4,
     .mobile-footer-star-5 {
-        width: 4.7vw;
-        max-width: 18.32px;
-        height: 4.5vw;
-        max-height: 17.51px;
+        width: 18.32px;
+        height: 17.51px;
         top: 2531.81px;
         position: absolute;
         z-index: 1;
@@ -2183,10 +2181,10 @@ footer {
     }
 
     .mobile-footer-star-1 { left: 59.8%; }
-    .mobile-footer-star-2 { left: 67.1%; }
-    .mobile-footer-star-3 { left: 74.4%; }
-    .mobile-footer-star-4 { left: 81.7%; }
-    .mobile-footer-star-5 { left: 89%; }
+    .mobile-footer-star-2 { left: calc(59.8% + 29px); }
+    .mobile-footer-star-3 { left: calc(59.8% + 58px); }
+    .mobile-footer-star-4 { left: calc(59.8% + 87px); }
+    .mobile-footer-star-5 { left: calc(59.8% + 116px); }
 
     /* Privacy & Cookie */
     .mobile-footer-privacy {
