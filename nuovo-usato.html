@@ -147,17 +147,21 @@
         <!-- MOBILE NUOVO-USATO CONTENT -->
         <div style="width: 100%; min-height: 1113px; position: relative; background: white; overflow: hidden; z-index: 1">
             
-            <!-- Titoli hero -->
-            <div style="width: 93%; left: 50%; top: 191px; position: absolute; text-align: center; color: #204072; font-size: clamp(32px, 10vw, 40px); font-family: Outfit; font-weight: 600; line-height: 1.16; word-wrap: break-word; transform: translateX(-50%)">IL VALORE DEL NUOVO</div>
-            
-            <!-- Video oblò -->
-            <div style="width: clamp(130px, 40vw, 160px); height: clamp(130px, 40vw, 160px); left: 50%; top: 340px; position: absolute; border-radius: 9999px; overflow: hidden; transform: translate(-50%, -50%);">
-                <video style="width: 100%; height: 100%; object-fit: cover;" autoplay loop muted playsinline>
-                    <source src="images/oblo-animato.webm" type="video/webm">
-                </video>
+            <!-- Hero section con titoli e video centrato -->
+            <div style="width: 100%; padding-top: 191px; display: flex; flex-direction: column; align-items: center; gap: clamp(20px, 6vw, 30px);">
+                <!-- Titolo 1 -->
+                <div style="width: 93%; text-align: center; color: #204072; font-size: clamp(32px, 10vw, 40px); font-family: Outfit; font-weight: 600; line-height: 1.16; word-wrap: break-word;">IL VALORE DEL NUOVO</div>
+                
+                <!-- Video oblò -->
+                <div style="width: clamp(130px, 40vw, 160px); height: clamp(130px, 40vw, 160px); border-radius: 9999px; overflow: hidden; flex-shrink: 0;">
+                    <video id="mobile-oblo-video" style="width: 100%; height: 100%; object-fit: cover;" autoplay loop muted playsinline webkit-playsinline>
+                        <source src="images/oblo-animato.webm?v=1" type="video/webm">
+                    </video>
+                </div>
+                
+                <!-- Titolo 2 -->
+                <div style="width: 93%; text-align: center; color: #81AEE0; font-size: clamp(32px, 10vw, 40px); font-family: Outfit; font-weight: 600; line-height: 1.16; word-wrap: break-word;">LA FIDUCIA DELL'USATO</div>
             </div>
-            
-            <div style="width: 93%; left: 50%; top: 461px; position: absolute; text-align: center; color: #81AEE0; font-size: clamp(32px, 10vw, 40px); font-family: Outfit; font-weight: 600; line-height: 1.16; word-wrap: break-word; transform: translateX(-50%)">LA FIDUCIA DELL'USATO</div>
             
             <!-- Testi descrittivi -->
             <div style="width: 93%; left: 50%; top: 672px; position: absolute; text-align: center; color: #204072; font-size: clamp(26px, 8vw, 32px); font-family: Outfit; font-weight: 600; line-height: 1.16; word-wrap: break-word; transform: translateX(-50%)">Prestazioni, garanzia e convenienza.</div>
@@ -224,5 +228,51 @@
             </div>
         </div>
     </div>
+    
+    <!-- Script per riproduzione video dopo navigazione -->
+    <script>
+        (function() {
+            const mobileVideo = document.getElementById('mobile-oblo-video');
+            
+            if (mobileVideo) {
+                // Funzione per riavviare il video
+                function restartVideo() {
+                    // Ricarica il video da zero
+                    mobileVideo.load();
+                    
+                    // Appena può riprodurre, fai partire
+                    mobileVideo.addEventListener('canplay', function() {
+                        mobileVideo.play().catch(e => console.log('Play error:', e));
+                    }, { once: true });
+                }
+                
+                // Al caricamento iniziale
+                restartVideo();
+                
+                // Quando la pagina viene mostrata (navigazione back/forward/menu)
+                window.addEventListener('pageshow', function(evt) {
+                    // Forza il reload completo del video
+                    restartVideo();
+                });
+                
+                // Quando la pagina diventa visibile
+                document.addEventListener('visibilitychange', function() {
+                    if (!document.hidden && mobileVideo.paused) {
+                        restartVideo();
+                    }
+                });
+            }
+            
+            // Gestione video desktop (se presente)
+            const desktopVideos = document.querySelectorAll('.contenitore-oblo video');
+            desktopVideos.forEach(video => {
+                window.addEventListener('pageshow', function() {
+                    if (video.paused) {
+                        video.play().catch(e => console.log('Play error:', e));
+                    }
+                });
+            });
+        })();
+    </script>
 </body>
 </html>
