@@ -1678,9 +1678,10 @@ footer {
     /* Button background - "Richiedi assistenza" */
     .mobile-btn-primary {
         width: auto;
+        max-width: 320px;
         min-width: 200px;
         height: auto;
-        padding: 2.5vw 8vw;
+        padding: clamp(8px, 2.5vw, 12px) clamp(20px, 8vw, 40px);
         left: 50%;
         transform: translateX(-50%);
         top: 643px;
