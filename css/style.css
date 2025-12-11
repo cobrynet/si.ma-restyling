@@ -1,3 +1,16 @@
+/* Mostra solo mobile-container su mobile, nascondi desktop */
+@media (max-width: 1024px) {
+    .mobile-container { 
+        display: block !important; 
+        border: 2px solid red !important;
+        background: #fffbe6 !important;
+    }
+    header, main, footer { display: none !important; }
+}
+@media (min-width: 1025px) {
+    .mobile-container { display: none !important; }
+    header, main, footer { display: block !important; }
+}
 header nav a.active {
     color: #81AEE0;
     font-weight: 400;
@@ -234,13 +247,14 @@ a.btn-secondary {
     color: #204072 !important;
     text-decoration: none !important;
     display: inline-block !important;
-    border-bottom: 2px solid transparent !important;
-    transition: border-bottom 0.3s ease !important;
+    position: relative !important;
+    padding-bottom: 2px !important;
+    z-index: 100 !important;
+    cursor: pointer !important;
 }
 
-.cta-buttons a.btn-secondary:hover,
 a.btn-secondary:hover {
-    border-bottom: 2px solid #204072 !important;
+    text-decoration: underline !important;
 }
 
 /* About Section */

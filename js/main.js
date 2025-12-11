@@ -205,15 +205,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Hover effect for btn-secondary links
+    // Clean up any inline styles on btn-secondary links that might interfere with CSS hover
     const secondaryLinks = document.querySelectorAll('a.btn-secondary');
     secondaryLinks.forEach(link => {
-        link.addEventListener('mouseenter', function() {
-            this.style.borderBottom = '2px solid #204072';
-        });
-        link.addEventListener('mouseleave', function() {
-            this.style.borderBottom = '2px solid transparent';
-        });
+        // Remove any inline border-bottom style
+        link.style.removeProperty('border-bottom');
+        link.style.removeProperty('text-decoration');
     });
 });
 
