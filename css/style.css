@@ -1418,9 +1418,16 @@ footer {
 }
 
 .dipartimento-btn:hover,
-.dipartimento-btn.active {
+.dipartimento-btn.active,
+.dipartimento-btn.selected {
     background: #204072;
     color: #FFFFFF;
+}
+
+.department-btn.selected {
+    background: #81AEE0 !important;
+    color: #204072 !important;
+    border-color: #81AEE0 !important;
 }
 
 .form-inline {
