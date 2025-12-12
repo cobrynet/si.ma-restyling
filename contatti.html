@@ -45,6 +45,15 @@
             color: #204072;
         }
         
+        /* Stile pulsante INVIA EMAIL mobile */
+        .mobile-submit-btn {
+            transition: all 0.3s ease;
+        }
+        .mobile-submit-btn:active {
+            background: #81AEE0 !important;
+            color: white !important;
+        }
+        
         /* Nascondi autocomplete dropdown solo su mobile */
         @media (max-width: 1024px) {
             #mobile-contact-form input:-webkit-autofill,
@@ -386,7 +395,7 @@ ${message}`;
             </div>
             
             <!-- Bottone INVIA EMAIL -->
-            <button type="submit" style="display: inline-block; padding: 12px 24px; border-radius: 29px; border: 1px white solid; cursor: pointer; background: transparent; color: white; font-size: 14px; font-family: Outfit; font-weight: 400;">INVIA EMAIL</button>
+            <button type="submit" class="mobile-submit-btn" style="display: inline-block; padding: 12px 24px; border-radius: 29px; border: 1px white solid; cursor: pointer; background: transparent; color: white; font-size: 14px; font-family: Outfit; font-weight: 400;">INVIA EMAIL</button>
         </form>
     </div>
     
