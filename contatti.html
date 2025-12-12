@@ -45,6 +45,17 @@
             color: #204072;
         }
         
+        /* Nascondi autocomplete dropdown solo su mobile */
+        @media (max-width: 1024px) {
+            #mobile-contact-form input:-webkit-autofill,
+            #mobile-contact-form input:-webkit-autofill:hover,
+            #mobile-contact-form input:-webkit-autofill:focus,
+            #mobile-contact-form input:-webkit-autofill:active {
+                -webkit-box-shadow: 0 0 0 30px #204072 inset !important;
+                -webkit-text-fill-color: #81AEE0 !important;
+            }
+        }
+        
         /* Nascondi mobile su desktop */
         @media (min-width: 1025px) {
             .mobile-container,
@@ -55,11 +66,75 @@
     </style>
     <script>
         function selectDepartment(button, department) {
-            const buttons = document.querySelectorAll('.department-btn');
+            const buttons = document.querySelectorAll('.department-btn, .dipartimento-btn');
             buttons.forEach(btn => btn.classList.remove('selected'));
             button.classList.add('selected');
-            button.closest('form') ? button.closest('form').dataset.department = department : null;
+            
+            // Mappa dipartimento -> email
+            const emailMap = {
+                'Amministrazione': 'amministrazione@assistenzalavanderie.it',
+                'Assistenza': 'manutenzione@assistenzalavanderie.it',
+                'Commerciale': 'commerciale@assistenzalavanderie.it'
+            };
+            
+            // Salva dipartimento e email nel form più vicino
+            const form = button.closest('form');
+            if (form) {
+                form.dataset.department = department;
+                form.dataset.departmentEmail = emailMap[department];
+            }
         }
+        
+        // Gestione submit form
+        document.addEventListener('DOMContentLoaded', function() {
+            const desktopForm = document.getElementById('desktop-contact-form');
+            const mobileForm = document.getElementById('mobile-contact-form');
+            
+            function handleSubmit(e) {
+                e.preventDefault();
+                
+                const form = e.target;
+                const departmentEmail = form.dataset.departmentEmail;
+                const department = form.dataset.department;
+                
+                // Verifica che sia stato selezionato un dipartimento
+                if (!departmentEmail) {
+                    alert('Per favore seleziona un dipartimento prima di inviare.');
+                    return;
+                }
+                
+                // Raccolta dati form
+                const formData = new FormData(form);
+                const name = formData.get('name');
+                const email = formData.get('email');
+                const phone = formData.get('phone');
+                const organization = formData.get('organization') || 'Non specificata';
+                const message = formData.get('message');
+                
+                // Costruisci mailto link
+                const subject = `Richiesta da ${name} per ${department}`;
+                const body = `Nome: ${name}
+Email: ${email}
+Telefono: ${phone}
+Organizzazione: ${organization}
+
+Messaggio:
+${message}`;
+                
+                const mailtoLink = `mailto:${departmentEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                
+                // Apri client email
+                window.location.href = mailtoLink;
+            }
+            
+            if (desktopForm) {
+                desktopForm.addEventListener('submit', handleSubmit);
+            }
+            
+            if (mobileForm) {
+                mobileForm.addEventListener('submit', handleSubmit);
+            }
+        });
         
         function copyToClipboardMobile(text, element) {
             navigator.clipboard.writeText(text).then(function() {
@@ -156,41 +231,41 @@
             
             <h2 class="form-title">Invia una mail al dipartimento desiderato</h2>
             
-            <form class="contatti-form">
+            <form class="contatti-form" id="desktop-contact-form" autocomplete="off">
                 <div class="form-group-full">
                     <label>Seleziona dipartimento*</label>
                     <div class="dipartimenti">
-                        <button type="button" class="dipartimento-btn">AMMINISTRAZIONE</button>
-                        <button type="button" class="dipartimento-btn">COMMERCIALE</button>
-                        <button type="button" class="dipartimento-btn">ASSISTENZA</button>
+                        <button type="button" class="dipartimento-btn" onclick="selectDepartment(this, 'Amministrazione')">AMMINISTRAZIONE</button>
+                        <button type="button" class="dipartimento-btn" onclick="selectDepartment(this, 'Commerciale')">COMMERCIALE</button>
+                        <button type="button" class="dipartimento-btn" onclick="selectDepartment(this, 'Assistenza')">ASSISTENZA</button>
                     </div>
                 </div>
                 
                 <div class="form-inline">
                     <div class="form-group">
                         <label>Nome completo*</label>
-                        <input type="text" placeholder="Nome e Cognome">
+                        <input type="text" name="name" placeholder="Nome e Cognome" required autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label>Email*</label>
-                        <input type="email" placeholder="Inserisci la tua mail">
+                        <input type="email" name="email" placeholder="Inserisci la tua mail" required autocomplete="off">
                     </div>
                 </div>
                 
                 <div class="form-inline">
                     <div class="form-group">
                         <label>Telefono*</label>
-                        <input type="tel" placeholder="+39 000 000 0000">
+                        <input type="tel" name="phone" placeholder="+39 000 000 0000" required autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label>Organizzazione</label>
-                        <input type="text" placeholder="Inserisci la tua azienda">
+                        <input type="text" name="organization" placeholder="Inserisci la tua azienda" autocomplete="off">
                     </div>
                 </div>
                 
                 <div class="form-group-full">
                     <label>Messaggio*</label>
-                    <textarea placeholder="Il tuo messaggio"></textarea>
+                    <textarea name="message" placeholder="Il tuo messaggio" required autocomplete="off"></textarea>
                 </div>
                 
                 <button type="submit" class="btn-submit">INVIA EMAIL</button>
@@ -265,7 +340,7 @@
     <!-- Background blu form - Full Width -->
     <div style="width: 100vw; margin-left: calc(-50vw + 50%); background: #204072; border-radius: 25px; padding: clamp(30px, 8vw, 40px) clamp(20px, 5vw, 30px) clamp(20px, 5vw, 30px); margin-top: clamp(75px, 25vw, 99px);">
         
-        <div style="max-width: 1200px; margin: 0 auto;">
+        <form id="mobile-contact-form" style="max-width: 1200px; margin: 0 auto;">
             
             <!-- Titolo form -->
             <div style="width: 100%; text-align: center; color: white; font-size: clamp(24px, 7.5vw, 32px); font-family: Outfit; font-weight: 600; line-height: 1.16; margin-bottom: clamp(35px, 11vw, 50px); word-wrap: break-word">Invia una mail al dipartimento desiderato</div>
@@ -283,38 +358,36 @@
             <!-- Campo Nome completo -->
             <div style="color: white; font-size: 14px; font-family: Outfit; font-weight: 400; margin-bottom: 10px;">Nome completo*</div>
             <div style="width: 100%; padding: 12px 16px; border-radius: 29px; border: 1px white solid; margin-bottom: clamp(35px, 11vw, 57px);">
-                <input type="text" placeholder="Nome e cognome..." style="width: 100%; background: transparent; border: none; color: #81AEE0; font-size: 14px; font-family: Outfit; font-weight: 300; outline: none;" class="form-input-light">
+                <input type="text" name="name" placeholder="Nome e cognome..." style="width: 100%; background: transparent; border: none; color: #81AEE0; font-size: 14px; font-family: Outfit; font-weight: 300; outline: none;" class="form-input-light" required>
             </div>
             
             <!-- Campo Email -->
             <div style="color: white; font-size: 14px; font-family: Outfit; font-weight: 400; margin-bottom: 10px;">Email*</div>
             <div style="width: 100%; padding: 12px 16px; border-radius: 29px; border: 1px white solid; margin-bottom: clamp(35px, 11vw, 57px);">
-                <input type="email" placeholder="info.esempio@gmail.com" style="width: 100%; background: transparent; border: none; color: #81AEE0; font-size: 14px; font-family: Outfit; font-weight: 300; outline: none;" class="form-input-light">
+                <input type="email" name="email" placeholder="info.esempio@gmail.com" style="width: 100%; background: transparent; border: none; color: #81AEE0; font-size: 14px; font-family: Outfit; font-weight: 300; outline: none;" class="form-input-light" required>
             </div>
             
             <!-- Campo Telefono -->
             <div style="color: white; font-size: 14px; font-family: Outfit; font-weight: 400; margin-bottom: 10px;">Telefono*</div>
             <div style="width: 100%; padding: 12px 16px; border-radius: 29px; border: 1px white solid; margin-bottom: clamp(35px, 11vw, 57px);">
-                <input type="tel" placeholder="+39 000 000 0000" style="width: 100%; background: transparent; border: none; color: #81AEE0; font-size: 14px; font-family: Outfit; font-weight: 300; outline: none;" class="form-input-light">
+                <input type="tel" name="phone" placeholder="+39 000 000 0000" style="width: 100%; background: transparent; border: none; color: #81AEE0; font-size: 14px; font-family: Outfit; font-weight: 300; outline: none;" class="form-input-light" required>
             </div>
             
             <!-- Campo Organizzazione -->
             <div style="color: white; font-size: 14px; font-family: Outfit; font-weight: 400; margin-bottom: 10px;">Organizzazione</div>
             <div style="width: 100%; padding: 12px 16px; border-radius: 29px; border: 1px white solid; margin-bottom: clamp(35px, 11vw, 57px);">
-                <input type="text" placeholder="Inserisci la tua azienda..." style="width: 100%; background: transparent; border: none; color: #81AEE0; font-size: 14px; font-family: Outfit; font-weight: 300; outline: none;" class="form-input-light">
+                <input type="text" name="organization" placeholder="Inserisci la tua azienda..." style="width: 100%; background: transparent; border: none; color: #81AEE0; font-size: 14px; font-family: Outfit; font-weight: 300; outline: none;" class="form-input-light">
             </div>
             
             <!-- Campo Messaggio -->
-            <div style="color: white; font-size: 14px; font-family: Outfit; font-weight: 400; margin-bottom: 10px;">Messaggio</div>
+            <div style="color: white; font-size: 14px; font-family: Outfit; font-weight: 400; margin-bottom: 10px;">Messaggio*</div>
             <div style="width: 100%; min-height: 122px; padding: 12px 16px; border-radius: 15px; border: 1px white solid; margin-bottom: clamp(30px, 8vw, 40px);">
-                <textarea placeholder="Il tuo messaggio..." style="width: 100%; min-height: 98px; background: transparent; border: none; color: #81AEE0; font-size: 14px; font-family: Outfit; font-weight: 300; outline: none; resize: vertical;" class="form-input-light"></textarea>
+                <textarea name="message" placeholder="Il tuo messaggio..." style="width: 100%; min-height: 98px; background: transparent; border: none; color: #81AEE0; font-size: 14px; font-family: Outfit; font-weight: 300; outline: none; resize: vertical;" class="form-input-light" required></textarea>
             </div>
             
             <!-- Bottone INVIA EMAIL -->
-            <div style="display: inline-block; padding: 12px 24px; border-radius: 29px; border: 1px white solid; cursor: pointer;">
-                <div style="text-align: center; color: white; font-size: 14px; font-family: Outfit; font-weight: 400;">INVIA EMAIL</div>
-            </div>
-        </div>
+            <button type="submit" style="display: inline-block; padding: 12px 24px; border-radius: 29px; border: 1px white solid; cursor: pointer; background: transparent; color: white; font-size: 14px; font-family: Outfit; font-weight: 400;">INVIA EMAIL</button>
+        </form>
     </div>
     
     <!-- Footer Container -->
