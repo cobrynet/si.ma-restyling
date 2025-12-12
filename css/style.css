@@ -775,6 +775,8 @@ footer {
     flex-direction: column;
     gap: 5px;
     flex-shrink: 0;
+    align-items: flex-start;
+    margin-top: 21px;
 }
 
 .footer-links a {
@@ -868,7 +870,7 @@ footer {
 }
 
 .footer-hours .emergency {
-    margin-top: clamp(8px, 1vw, 10px);
+    margin-top: clamp(23px, 1vw, 25px);
     text-align: left;
 }
 
