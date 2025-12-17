@@ -1,5 +1,10 @@
 // Main JavaScript file for SI.MA Restyling
 
+// Detect Android and add class to body for Android-specific CSS
+if (/android/i.test(navigator.userAgent)) {
+    document.documentElement.classList.add('android');
+}
+
 // Smooth scrolling for mobile arrow
 document.addEventListener('DOMContentLoaded', function() {
     const mobileArrow = document.querySelector('.mobile-arrow');

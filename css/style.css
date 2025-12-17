@@ -2423,3 +2423,14 @@ footer {
         border-bottom-color: #81AEE0;
     }
 }
+
+/* Android-specific fix for scroll issue */
+@media (max-width: 1024px) {
+    html.android .mobile-container {
+        padding-bottom: 100px;
+    }
+    
+    html.android .mobile-footer-spacer {
+        height: 80px;
+    }
+}
