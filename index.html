@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SI.MA - Assistenza e Vendita Lavatrici Industriali</title>
     <link rel="stylesheet" href="css/style.css?v=1764593500">
-    <script src="js/main.js?v=16" defer></script></script></script>
+    <script src="js/main.js?v=20" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
@@ -36,7 +36,7 @@
         <a href="nuovo-usato.html" class="mobile-link-lavatrici" style="text-decoration: none;">scopri le lavatrici disponibili</a>
         
         <!-- Arrow icon -->
-        <a href="#mobile-about" class="mobile-arrow"></a>
+        <a href="#mobile-about" class="mobile-arrow" onclick="event.preventDefault(); document.getElementById('mobile-about').scrollIntoView({behavior: 'smooth', block: 'start'}); return false;"></a>
         
         <!-- About Section -->
         <div id="mobile-about" class="mobile-about-title">SI.MA. Il tuo partner per il lavaggio industriale.</div>
@@ -89,7 +89,9 @@
         <div class="mobile-footer-divider"></div>
         <div class="mobile-footer-title-contatti">CONTATTI</div>
         <div class="mobile-footer-address">Via Stefano Ussi 22<br/>Scandicci (FI) 50018</div>
-        <div class="mobile-footer-tel">Tel. 055 7327456</div>
+        <a href="tel:+390557327456" style="text-decoration: none;">
+            <div class="mobile-footer-tel">Tel. 055 7327456</div>
+        </a>
         <div class="mobile-footer-email">info@assistenzalavanderie.it</div>
         <div class="mobile-footer-website">www.assistenzalavanderie.it</div>
         <div class="mobile-footer-piva">P.IVA 01867350975</div>

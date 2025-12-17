@@ -1,17 +1,24 @@
 // Main JavaScript file for SI.MA Restyling
 
-// Smooth scrolling for mobile arrow - scroll to end of white rectangle
+// Smooth scrolling for mobile arrow
 document.addEventListener('DOMContentLoaded', function() {
     const mobileArrow = document.querySelector('.mobile-arrow');
+    console.log('Mobile arrow found:', mobileArrow); // Debug
+    
     if (mobileArrow) {
+        console.log('Adding click listener to mobile arrow'); // Debug
         mobileArrow.addEventListener('click', function(e) {
+            console.log('Arrow clicked!'); // Debug
             e.preventDefault();
-            // Scroll to 830px from top (end of first white rectangle)
+            
+            // Scroll to the target section
             window.scrollTo({
-                top: 830,
+                top: 900,
                 behavior: 'smooth'
             });
         });
+    } else {
+        console.log('Mobile arrow NOT found'); // Debug
     }
 });
 

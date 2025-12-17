@@ -155,45 +155,47 @@ ${message}`;
                 const notification = document.createElement('div');
                 notification.textContent = '✓ Copiato!';
                 notification.style.cssText = `
-                    position: absolute;
-                    top: ${rect.top + scrollTop - 40}px;
+                    position: fixed;
+                    top: ${rect.top - 50}px;
                     left: ${rect.left + (rect.width / 2)}px;
                     transform: translateX(-50%);
                     background: #81AEE0;
                     color: #FFFFFF;
-                    padding: 6px 12px;
-                    border-radius: 6px;
+                    padding: 8px 16px;
+                    border-radius: 8px;
                     font-family: Outfit;
-                    font-size: 12px;
+                    font-size: 14px;
                     font-weight: 500;
                     white-space: nowrap;
                     z-index: 10000;
-                    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+                    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
                     opacity: 0;
-                    transition: opacity 0.3s;
+                    transition: opacity 0.3s, transform 0.3s;
                 `;
                 
                 const arrow = document.createElement('div');
                 arrow.style.cssText = `
                     position: absolute;
-                    bottom: -5px;
+                    bottom: -6px;
                     left: 50%;
                     transform: translateX(-50%);
                     width: 0;
                     height: 0;
-                    border-left: 5px solid transparent;
-                    border-right: 5px solid transparent;
-                    border-top: 5px solid #81AEE0;
+                    border-left: 6px solid transparent;
+                    border-right: 6px solid transparent;
+                    border-top: 6px solid #81AEE0;
                 `;
                 notification.appendChild(arrow);
                 document.body.appendChild(notification);
                 
                 setTimeout(function() {
                     notification.style.opacity = '1';
+                    notification.style.transform = 'translateX(-50%) translateY(-5px)';
                 }, 10);
                 
                 setTimeout(function() {
                     notification.style.opacity = '0';
+                    notification.style.transform = 'translateX(-50%) translateY(0px)';
                     setTimeout(function() {
                         notification.remove();
                     }, 300);
@@ -330,7 +332,7 @@ ${message}`;
             <div class="footer-contacts">
                 <h4>CONTATTI</h4>
                 <p>Via Stefano Ussi 22<br>Scandicci (FI) 50018</p>
-                <p>Tel. 055 7327456</p>
+                <p><a href="tel:+390557327456" style="color: inherit; text-decoration: none;">Tel. 055 7327456</a></p>
                 <p>info@assistenzalavanderie.it</p>
                 <p>www.assistenzalavanderie.it</p>
                 <p>P.IVA 01867350975</p>
@@ -373,7 +375,9 @@ ${message}`;
         <div class="copyable-contact" onclick="copyToClipboardMobile('info@assistenzalavanderie.it', this)" style="width: calc(100% - 30px); max-width: 320px; margin: clamp(30px, 10vw, 40px) auto 0; padding: 18px; border-radius: 29px; border: 2px #204072 solid; text-align: center; color: #204072; font-size: clamp(14px, 4vw, 16px); font-family: Outfit; font-weight: 500; word-wrap: break-word">info@assistenzalavanderie.it</div>
         
         <!-- Telefono Box -->
-        <div class="copyable-contact" onclick="copyToClipboardMobile('055 732 7456', this)" style="width: calc(100% - 30px); max-width: 320px; margin: clamp(15px, 4vw, 20px) auto 0; padding: 18px; border-radius: 29px; border: 2px #204072 solid; text-align: center; color: #204072; font-size: clamp(14px, 4vw, 16px); font-family: Outfit; font-weight: 500; word-wrap: break-word">055 732 7456</div>
+        <a href="tel:+390557327456" style="text-decoration: none; display: block; width: calc(100% - 30px); max-width: 320px; margin: clamp(15px, 4vw, 20px) auto 0;">
+            <div class="copyable-contact" onclick="event.stopPropagation();" style="padding: 18px; border-radius: 29px; border: 2px #204072 solid; text-align: center; color: #204072; font-size: clamp(14px, 4vw, 16px); font-family: Outfit; font-weight: 500; word-wrap: break-word">055 732 7456</div>
+        </a>
         
         <!-- Indirizzo con icona pin -->
         <div class="copyable-contact" onclick="copyToClipboardMobile('Via Stefano Ussi 22 Scandicci (FI) 50018', this)" style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: clamp(15px, 4vw, 20px); padding: 0 15px;">
@@ -456,7 +460,9 @@ ${message}`;
         <div class="mobile-footer-divider"></div>
         <div class="mobile-footer-title-contatti">CONTATTI</div>
         <div class="mobile-footer-address">Via Stefano Ussi 22<br/>Scandicci (FI) 50018</div>
-        <div class="mobile-footer-tel">Tel. 055 7327456</div>
+        <a href="tel:+390557327456" style="text-decoration: none;">
+            <div class="mobile-footer-tel">Tel. 055 7327456</div>
+        </a>
         <div class="mobile-footer-email">info@assistenzalavanderie.it</div>
         <div class="mobile-footer-website">www.assistenzalavanderie.it</div>
         <div class="mobile-footer-piva">P.IVA 01867350975</div>
