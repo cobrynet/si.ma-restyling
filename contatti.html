@@ -2,6 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SI.MA - Contatti</title>
     <link rel="stylesheet" href="css/style.css?v=1764593500">
     <script src="js/main.js?v=17" defer></script>
@@ -146,7 +147,8 @@ ${message}`;
         });
         
         function copyToClipboardMobile(text, element) {
-            navigator.clipboard.writeText(text).then(function() {
+            // Funzione per mostrare la notifica
+            function showNotification(element) {
                 const rect = element.getBoundingClientRect();
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 
@@ -196,9 +198,38 @@ ${message}`;
                         notification.remove();
                     }, 300);
                 }, 1500);
-            }).catch(function(err) {
-                console.error('Errore nella copia:', err);
-            });
+            }
+            
+            // Prova prima con navigator.clipboard
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(function() {
+                    showNotification(element);
+                }).catch(function(err) {
+                    // Fallback a execCommand
+                    fallbackCopy(text, element);
+                });
+            } else {
+                // Fallback diretto
+                fallbackCopy(text, element);
+            }
+            
+            function fallbackCopy(text, element) {
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.cssText = 'position: fixed; top: 0; left: 0; width: 1px; height: 1px; padding: 0; border: none; outline: none; box-shadow: none; background: transparent;';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                try {
+                    document.execCommand('copy');
+                    showNotification(element);
+                } catch (err) {
+                    console.error('Errore nella copia:', err);
+                }
+                
+                document.body.removeChild(textArea);
+            }
         }
     </script>
 </head>
