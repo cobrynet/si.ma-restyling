@@ -1,10 +1,24 @@
 /* Mostra solo mobile-container su mobile, nascondi desktop */
 @media (max-width: 1024px) {
+    html, body {
+        width: 100%;
+        max-width: 100vw;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+    }
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar,
+    .mobile-container::-webkit-scrollbar {
+        display: none; /* Safari/Chrome - nasconde ma mantiene funzionalità */
+    }
     .mobile-container { 
         display: block !important;
         width: 100%;
-        min-height: 100vh;
+        max-width: 100%;
+        min-height: auto;
+        position: relative;
     }
+    .mobile-only { display: block !important; }
     header, main, footer { display: none !important; }
 }
 @media (min-width: 1025px) {
@@ -1532,6 +1546,10 @@ footer {
     display: none;
 }
 
+.mobile-only {
+    display: none;
+}
+
 /* ========================================
    MOBILE VERSION - MAX 1024PX (UNDER 13")
    ======================================== */
@@ -1555,6 +1573,7 @@ footer {
     /* Mobile container */
     body {
         width: 100%;
+        max-width: 100%;
         min-height: 100vh;
         position: relative;
         background: white;
@@ -1566,6 +1585,7 @@ footer {
     body.home::before {
         content: '';
         width: 100%;
+        max-width: 100%;
         height: clamp(1040px, 128vw, 1060px);
         left: 0;
         top: 704px;
@@ -1580,6 +1600,7 @@ footer {
     body:not(.contatti)::after {
         content: '';
         width: 100%;
+        max-width: 100%;
         height: 840px;
         left: 0;
         top: 0px;
