@@ -9,26 +9,63 @@
     <!-- Legalblink Cookie Solution Script -->
     <script type="text/javascript" src="https://app.legalblink.it/api/scripts/lb_cs.js"></script>
     <script id="lb_cs" type="text/javascript">lb_cs("6903b050190efd002845d26b");</script>
-    <!-- Debug Legalblink -->
+    <!-- Debug Legalblink + Forza visibilità -->
     <script>
         console.log('=== LEGALBLINK DEBUG ===');
         console.log('lb_cs function exists:', typeof lb_cs !== 'undefined');
         
         // Controlla dopo 2 secondi se sono stati creati elementi Legalblink
         setTimeout(() => {
-            const lbElements = document.querySelectorAll('[id*="lb"], [class*="lb"]');
-            console.log('Elementi Legalblink trovati:', lbElements.length);
+            const lbElements = document.querySelectorAll('[id*="lb"], [class*="lb"], [id*="cookie"], [class*="cookie"]');
+            console.log('Elementi trovati:', lbElements.length);
+            
+            if (lbElements.length === 0) {
+                console.log('❌ NESSUN elemento Legalblink trovato!');
+                console.log('⚠️ Il dominio potrebbe non essere autorizzato su Legalblink');
+            }
+            
             lbElements.forEach((el, i) => {
-                console.log(`Elemento ${i}:`, {
+                const style = window.getComputedStyle(el);
+                const info = {
                     tag: el.tagName,
                     id: el.id,
                     class: el.className,
                     visible: el.offsetParent !== null,
-                    zIndex: window.getComputedStyle(el).zIndex,
-                    display: window.getComputedStyle(el).display,
-                    position: window.getComputedStyle(el).position
-                });
+                    zIndex: style.zIndex,
+                    display: style.display,
+                    position: style.position,
+                    opacity: style.opacity,
+                    visibility: style.visibility,
+                    width: style.width,
+                    height: style.height
+                };
+                
+                console.log(`Elemento ${i}:`, info);
+                
+                // FORZA la visibilità se è nascosto
+                if (el.id.includes('lb') || el.className.toString().includes('lb')) {
+                    console.log('🔧 Forzo visibilità elemento Legalblink:', el.id || el.className);
+                    el.style.cssText += `
+                        z-index: 9999999 !important;
+                        opacity: 1 !important;
+                        visibility: visible !important;
+                        display: block !important;
+                        pointer-events: auto !important;
+                    `;
+                }
             });
+            
+            // Cerca anche in shadow DOM
+            const allElements = document.querySelectorAll('*');
+            let shadowCount = 0;
+            allElements.forEach(el => {
+                if (el.shadowRoot) {
+                    shadowCount++;
+                    console.log('Found shadow DOM in:', el.tagName, el.id, el.className);
+                }
+            });
+            console.log('Shadow DOM elements found:', shadowCount);
+            
         }, 2000);
     </script>
     <!-- Our main script -->
