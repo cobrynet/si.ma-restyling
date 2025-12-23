@@ -6,7 +6,15 @@
     <title>SI.MA - Nuovo e Usato</title>
     <link rel="icon" type="image/png" href="images/PNG/favicon-si.ma.png">
     <link rel="stylesheet" href="css/style.css?v=1764593500">
-    <script src="js/main.js?v=17" defer></script>
+    <!-- Legalblink Cookie Solution Script -->
+    <script type="text/javascript" src="https://app.legalblink.it/api/scripts/lb_cs.js"></script>
+    <script id="lb_cs" type="text/javascript">
+        if (typeof lb_cs === 'function') {
+            lb_cs("6903b050190efd002845d26b");
+        }
+    </script>
+    <!-- Our main script -->
+    <script src="js/main.js?v=25"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
@@ -112,8 +120,9 @@
                     <img src="images/SVG/si.ma-logo.svg" alt="SI.MA Logo" style="cursor: pointer;">
                 </a>
                 <div class="footer-links">
-                    <a href="https://www.assistenzalavanderie.it/privacy-policy" target="_blank">Privacy Policy</a>
-                    <a href="https://www.assistenzalavanderie.it/cookie-policy" target="_blank">Cookie Policy</a>
+                    <a href="/privacy-policy">Privacy Policy</a>
+                    <a href="/cookie-policy">Cookie Policy</a>
+                    <a href="#" class="lb-cs-settings-link">Aggiorna le preferenze sui cookie</a>
                     <a href="https://www.cobrynet.com/" target="_blank" class="footer-credits">Design by Cobrynet</a>
                 </div>
             </div>
@@ -212,10 +221,11 @@
         <div class="mobile-footer-emergenze" style="top: 1424px !important;">Emergenze</div>
         <div class="mobile-footer-24-7" style="top: 1442px !important;">24/7</div>
         
-        <a href="https://www.assistenzalavanderie.it/privacy-policy" target="_blank" class="mobile-footer-privacy" style="top: 1497px !important;">Privacy Policy</a>
-        <a href="https://www.assistenzalavanderie.it/cookie-policy" target="_blank" class="mobile-footer-cookie" style="top: 1530px !important;">Cookie Policy</a>
+        <a href="https://app.legalblink.it/api/documents/6903b050190efd002845d26b/privacy-policy-per-siti-web-o-e-commerce-it" target="_blank" class="mobile-footer-privacy" style="top: 1497px !important; pointer-events: auto !important;">Privacy Policy</a>
+        <a href="https://app.legalblink.it/api/documents/6903b050190efd002845d26b/cookie-policy-it" target="_blank" class="mobile-footer-cookie" style="top: 1530px !important; pointer-events: auto !important;">Cookie Policy</a>
+        <a href="#" class="lb-cs-settings-link mobile-footer-cookie-settings" style="top: 1565px !important; pointer-events: auto !important;">Aggiorna le preferenze sui cookie</a>
         
-        <a href="https://www.cobrynet.com/" target="_blank" class="mobile-footer-design" style="top: 1612px !important;">Design by Cobrynet</a>
+        <a href="https://www.cobrynet.com/" target="_blank" class="mobile-footer-design" style="left: 6.4% !important; top: 1570px !important;">Design by Cobrynet</a>
         <div class="mobile-footer-spacer" style="top: 1645px !important;"></div>
         
         <!-- Hamburger Menu -->
@@ -285,5 +295,7 @@
             });
         })();
     </script>
+    
 </body>
 </html>
+

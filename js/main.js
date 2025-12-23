@@ -228,3 +228,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Console message
 console.log('SI.MA Restyling - Website initialized');
+
+// Cookie preferences - Legalblink handles .lb-cs-settings-link automatically
+// No custom JavaScript needed - the class itself triggers the modal

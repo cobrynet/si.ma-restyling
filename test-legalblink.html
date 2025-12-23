@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test LegalBlink</title>
+</head>
+<body>
+    <h1>Test LegalBlink Cookie Consent</h1>
+    <p>Se LegalBlink funziona, dovresti vedere il banner di consenso cookie.</p>
+    
+    <br><br>
+    <a href="#" class="lb-cs-settings-link">Clicca qui per aprire le preferenze cookie</a>
+    
+    <script src="https://app.legalblink.it/api/cookie-solution/6903b050190efd002845d27c/script.js"></script>
+    
+    <script>
+        // Log per debug
+        console.log('Test LegalBlink caricato');
+        setTimeout(() => {
+            console.log('window.lb_cs:', typeof window.lb_cs);
+            console.log('LegalBlink objects:', Object.keys(window).filter(k => k.toLowerCase().includes('legal')));
+        }, 2000);
+    </script>
+</body>
+</html>

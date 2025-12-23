@@ -3,7 +3,9 @@
     { "source": "/", "destination": "/index.html" },
     { "source": "/contatti", "destination": "/contatti.html" },
     { "source": "/servizi", "destination": "/servizi.html" },
-    { "source": "/nuovo-usato", "destination": "/nuovo-usato.html" }
+    { "source": "/nuovo-usato", "destination": "/nuovo-usato.html" },
+    { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
+    { "source": "/cookie-policy", "destination": "/cookie-policy.html" }
   ],
   "cleanUrls": true
 }

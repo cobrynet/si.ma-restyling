@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Legalblink</title>
+    
+    <!-- Legalblink Cookie Solution Script -->
+    <script type="text/javascript" src="https://app.legalblink.it/api/scripts/lb_cs.js"></script>
+    <script id="lb_cs" type="text/javascript">lb_cs("6903b050190efd002845d26b");</script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 50px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 { color: #333; }
+        .info-box {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .test-link {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .test-link:hover {
+            background: #0056b3;
+        }
+        #log {
+            background: #1e1e1e;
+            color: #0f0;
+            padding: 20px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .lb-cs-settings-link {
+            color: #007bff;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test Legalblink - ID: 6903b050190efd002845d26b</h1>
+    
+    <div class="info-box">
+        <h3>Istruzioni:</h3>
+        <ol>
+            <li>Se hai già accettato i cookie, clicca su "Elimina Cookie" per resettare</li>
+            <li>Ricarica la pagina - dovresti vedere il banner Legalblink</li>
+            <li>Prova a cliccare su "Aggiorna preferenze cookie"</li>
+        </ol>
+    </div>
+    
+    <div>
+        <button class="test-link" onclick="deleteCookies()">Elimina Cookie e Ricarica</button>
+        <br>
+        <a href="#" class="lb-cs-settings-link">Aggiorna preferenze cookie</a>
+    </div>
+    
+    <div id="log"></div>
+    
+    <script>
+        function log(msg) {
+            const logDiv = document.getElementById('log');
+            const time = new Date().toLocaleTimeString();
+            logDiv.innerHTML += `<div>[${time}] ${msg}</div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(msg);
+        }
+        
+        log('✅ Pagina caricata');
+        
+        // Check if Legalblink script loaded
+        setTimeout(() => {
+            log('📋 Verifica script Legalblink...');
+            
+            // Check for lb_cs function
+            if (typeof lb_cs === 'function') {
+                log('✅ Funzione lb_cs trovata!');
+            } else {
+                log('❌ Funzione lb_cs NON trovata!');
+            }
+            
+            // Check for cookies
+            const cookies = document.cookie;
+            log('🍪 Cookie presenti: ' + (cookies ? cookies.split(';').length : '0'));
+            
+            if (cookies.includes('lb')) {
+                log('✅ Cookie Legalblink trovati - banner potrebbe essere nascosto');
+            } else {
+                log('⚠️  Nessun cookie Legalblink - banner dovrebbe apparire');
+            }
+            
+            // Check for Legalblink elements in DOM
+            const lbElements = document.querySelectorAll('[id*="lb"], [class*="lb"]');
+            log('📦 Elementi Legalblink nel DOM: ' + lbElements.length);
+            
+            lbElements.forEach(el => {
+                log('   → ' + el.tagName + ' id=' + el.id + ' class=' + el.className);
+            });
+        }, 2000);
+        
+        function deleteCookies() {
+            log('🔄 Eliminazione cookie...');
+            
+            // Delete all cookies
+            const cookies = document.cookie.split(";");
+            for (let cookie of cookies) {
+                const name = cookie.split("=")[0].trim();
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+                log('   ❌ Eliminato: ' + name);
+            }
+            
+            log('✅ Cookie eliminati. Ricaricamento...');
+            setTimeout(() => location.reload(), 1000);
+        }
+        
+        // Log all clicks
+        document.addEventListener('click', (e) => {
+            log('🖱️  Click su: ' + e.target.tagName + ' class=' + e.target.className);
+        });
+    </script>
+</body>
+</html>

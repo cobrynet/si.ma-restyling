@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Cookie Link - Simple</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 50px;
+            background: #f5f5f5;
+        }
+        .test-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        #log {
+            background: #1e1e1e;
+            color: #0f0;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-box">
+        <h1>🧪 Test Cookie Link</h1>
+        
+        <h3>Test 1: Onclick Inline</h3>
+        <button class="btn" onclick="testClick1()">Click Test 1 (Inline)</button>
+        
+        <h3>Test 2: Con Classe</h3>
+        <a href="#" class="lb-cs-settings-link btn">Click Test 2 (Classe)</a>
+        
+        <h3>Test 3: JavaScript Diretto</h3>
+        <button class="btn" id="test3">Click Test 3 (JS)</button>
+        
+        <div id="log"></div>
+    </div>
+    
+    <script>
+        function log(msg) {
+            const logDiv = document.getElementById('log');
+            const time = new Date().toLocaleTimeString();
+            logDiv.innerHTML += `<div>[${time}] ${msg}</div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(msg);
+        }
+        
+        log('✅ Page loaded');
+        
+        function testClick1() {
+            log('🎯 Test 1 clicked!');
+            alert('Test 1 funziona!');
+        }
+        
+        // Test 2: Attach to class
+        document.addEventListener('DOMContentLoaded', function() {
+            log('✅ DOM Content Loaded');
+            
+            const link = document.querySelector('.lb-cs-settings-link');
+            if (link) {
+                log('✅ Found lb-cs-settings-link');
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    log('🎯 Test 2 clicked!');
+                    alert('Test 2 funziona!');
+                });
+            } else {
+                log('❌ Link not found!');
+            }
+            
+            // Test 3: Direct button
+            const btn3 = document.getElementById('test3');
+            if (btn3) {
+                log('✅ Found test3 button');
+                btn3.addEventListener('click', function(e) {
+                    log('🎯 Test 3 clicked!');
+                    alert('Test 3 funziona!');
+                });
+            }
+        });
+        
+        // Log all clicks on document
+        document.addEventListener('click', function(e) {
+            log('📍 Click detected on: ' + e.target.tagName + ' class=' + e.target.className);
+        });
+    </script>
+</body>
+</html>
