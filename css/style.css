@@ -2457,3 +2457,19 @@ footer {
         height: 80px;
     }
 }
+
+/* Legalblink Cookie Banner - Assicura che sia sempre sopra tutto */
+[id*="lb-cs"],
+[class*="lb-cs"],
+[id*="legalblink"],
+[class*="legalblink"] {
+    z-index: 999999 !important;
+}
+
+/* Modal Legalblink sempre in primo piano */
+[id*="lb-cs-modal"],
+[class*="lb-cs-modal"],
+[id*="lb-modal"],
+[class*="lb-modal"] {
+    z-index: 9999999 !important;
+}
