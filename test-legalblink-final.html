@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Legalblink - SI.MA</title>
+    <!-- Legalblink Cookie Solution Script -->
+    <script type="text/javascript" src="https://app.legalblink.it/api/scripts/lb_cs.js"></script>
+    <script id="lb_cs" type="text/javascript">lb_cs("6903b050190efd002845d26b");</script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .test-link {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 10px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .test-link:hover {
+            background: #0056b3;
+        }
+        .info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-left: 4px solid #2196F3;
+            margin-top: 20px;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-box">
+        <h1>🧪 Test Legalblink</h1>
+        <p><strong>ID Progetto:</strong> 6903b050190efd002845d26b</p>
+        
+        <h2>Test Link:</h2>
+        <a href="https://app.legalblink.it/api/documents/6903b050190efd002845d26b/privacy-policy-per-siti-web-o-e-commerce-it" target="_blank" class="test-link">
+            📄 Privacy Policy
+        </a>
+        
+        <a href="https://app.legalblink.it/api/documents/6903b050190efd002845d26b/cookie-policy-it" target="_blank" class="test-link">
+            🍪 Cookie Policy
+        </a>
+        
+        <a href="#" class="lb-cs-settings-link test-link" style="background: #28a745;">
+            ⚙️ Aggiorna Preferenze Cookie
+        </a>
+        
+        <div class="info">
+            <strong>ℹ️ Come funziona:</strong>
+            <ul>
+                <li>I primi due link aprono pagine Legalblink in una nuova scheda</li>
+                <li>Il terzo link (verde) dovrebbe aprire il modal delle preferenze cookie</li>
+                <li>Se il modal non si apre, significa che lo script Legalblink non è attivo</li>
+            </ul>
+        </div>
+        
+        <div class="status" id="status">
+            <strong>Status Script:</strong> <span id="scriptStatus">Caricamento...</span>
+        </div>
+    </div>
+    
+    <script>
+        // Verifica se Legalblink è caricato
+        setTimeout(function() {
+            var statusEl = document.getElementById('scriptStatus');
+            if (typeof lb_cs === 'function') {
+                statusEl.innerHTML = '✅ Script Legalblink caricato correttamente';
+                statusEl.style.color = 'green';
+                
+                // Cerca elementi Legalblink nel DOM
+                setTimeout(function() {
+                    var lbElements = document.querySelectorAll('[class*="lb"], [id*="lb"]');
+                    if (lbElements.length > 0) {
+                        statusEl.innerHTML += '<br>📦 Trovati ' + lbElements.length + ' elementi Legalblink nel DOM';
+                    }
+                }, 2000);
+            } else {
+                statusEl.innerHTML = '❌ Script Legalblink NON caricato';
+                statusEl.style.color = 'red';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

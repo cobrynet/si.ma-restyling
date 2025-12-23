@@ -7,49 +7,8 @@
     <link rel="icon" type="image/png" href="images/PNG/favicon-si.ma.png">
     <link rel="stylesheet" href="css/style.css?v=1734457000">
     <!-- Legalblink Cookie Solution Script -->
-    <script type="text/javascript">
-        // DEBUG: Cancella cookies Legalblink per testare
-        document.cookie.split(";").forEach(function(c) { 
-            if (c.trim().startsWith('lb_')) {
-                document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-                console.log('🗑️ Rimosso cookie:', c.trim().split('=')[0]);
-            }
-        });
-        
-        // Load Legalblink script dynamically
-        (function() {
-            var script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = 'https://app.legalblink.it/api/scripts/lb_cs.js';
-            script.onload = function() {
-                console.log('✅ Script Legalblink caricato');
-                if (typeof lb_cs === 'function') {
-                    try {
-                        lb_cs("6903b050190efd002845d26b");
-                        console.log('✅ Legalblink inizializzato con ID: 6903b050190efd002845d26b');
-                        // Forza visualizzazione del banner per test
-                        setTimeout(function() {
-                            console.log('🔍 Cerco elementi Legalblink nel DOM...');
-                            var lbElements = document.querySelectorAll('[class*="lb"], [id*="lb"]');
-                            console.log('📦 Elementi Legalblink trovati:', lbElements.length);
-                            lbElements.forEach(function(el) {
-                                console.log('  -', el.tagName, el.className || el.id);
-                            });
-                        }, 2000);
-                    } catch(e) {
-                        console.error('❌ Errore inizializzazione Legalblink:', e);
-                    }
-                } else {
-                    console.error('❌ Funzione lb_cs non disponibile dopo il caricamento');
-                }
-            };
-            script.onerror = function() {
-                console.error('❌ Errore caricamento script Legalblink');
-                console.log('⚠️  Possibile problema: script bloccato o dominio non autorizzato');
-            };
-            document.head.appendChild(script);
-        })();
-    </script>
+    <script type="text/javascript" src="https://app.legalblink.it/api/scripts/lb_cs.js"></script>
+    <script id="lb_cs" type="text/javascript">lb_cs("6903b050190efd002845d26b");</script>
     <!-- Our main script -->
     <script src="js/main.js?v=25"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
