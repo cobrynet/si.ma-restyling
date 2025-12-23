@@ -87,12 +87,21 @@
                 'Commerciale': 'commerciale@assistenzalavanderie.it'
             };
             
-            // Salva dipartimento e email nel form più vicino
-            const form = button.closest('form');
-            if (form) {
-                form.dataset.department = department;
-                form.dataset.departmentEmail = emailMap[department];
+            // Salva dipartimento e email in ENTRAMBI i form (desktop e mobile)
+            const desktopForm = document.getElementById('desktop-contact-form');
+            const mobileForm = document.getElementById('mobile-contact-form');
+            
+            if (desktopForm) {
+                desktopForm.dataset.department = department;
+                desktopForm.dataset.departmentEmail = emailMap[department];
             }
+            
+            if (mobileForm) {
+                mobileForm.dataset.department = department;
+                mobileForm.dataset.departmentEmail = emailMap[department];
+            }
+            
+            console.log('Dipartimento selezionato:', department, '- Email:', emailMap[department]);
         }
         
         // Gestione submit form
@@ -106,6 +115,8 @@
                 const form = e.target;
                 const departmentEmail = form.dataset.departmentEmail;
                 const department = form.dataset.department;
+                
+                console.log('Form submit - Dipartimento:', department, '- Email destinazione:', departmentEmail);
                 
                 // Verifica che sia stato selezionato un dipartimento
                 if (!departmentEmail) {
@@ -132,6 +143,8 @@ Messaggio:
 ${message}`;
                 
                 const mailtoLink = `mailto:${departmentEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                
+                console.log('Apertura mailto:', mailtoLink);
                 
                 // Apri client email
                 window.location.href = mailtoLink;
