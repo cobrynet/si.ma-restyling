@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SI.MA - Contatti</title>
+    <link rel="icon" type="image/jpeg" href="images/favicon-si.ma.jpg">
     <link rel="stylesheet" href="css/style.css?v=1734458000">
     <script src="js/main.js?v=21" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -126,28 +127,43 @@
                 
                 // Raccolta dati form
                 const formData = new FormData(form);
-                const name = formData.get('name');
-                const email = formData.get('email');
-                const phone = formData.get('phone');
-                const organization = formData.get('organization') || 'Non specificata';
-                const message = formData.get('message');
+                formData.append('department', department);
+                formData.append('departmentEmail', departmentEmail);
                 
-                // Costruisci mailto link
-                const subject = `Richiesta da ${name} per ${department}`;
-                const body = `Nome: ${name}
-Email: ${email}
-Telefono: ${phone}
-Organizzazione: ${organization}
-
-Messaggio:
-${message}`;
+                // Disabilita il pulsante submit
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'INVIO IN CORSO...';
                 
-                const mailtoLink = `mailto:${departmentEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                
-                console.log('Apertura mailto:', mailtoLink);
-                
-                // Apri client email
-                window.location.href = mailtoLink;
+                // Invia i dati al server PHP
+                fetch('send-email.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Email inviata con successo!');
+                        form.reset();
+                        // Rimuovi la selezione del dipartimento
+                        const buttons = document.querySelectorAll('.department-btn, .dipartimento-btn');
+                        buttons.forEach(btn => btn.classList.remove('selected'));
+                        form.dataset.department = '';
+                        form.dataset.departmentEmail = '';
+                    } else {
+                        alert('Errore nell\'invio: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Errore:', error);
+                    alert('Errore durante l\'invio dell\'email. Riprova più tardi.');
+                })
+                .finally(() => {
+                    // Riabilita il pulsante
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                });
             }
             
             if (desktopForm) {
