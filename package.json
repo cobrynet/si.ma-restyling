@@ -1,0 +1,9 @@
+{
+  "name": "si.ma-restyling",
+  "version": "1.0.0",
+  "description": "SI.MA website with serverless email functionality",
+  "type": "module",
+  "dependencies": {
+    "resend": "^3.0.0"
+  }
+}

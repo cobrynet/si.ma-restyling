@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SI.MA - Contatti</title>
-    <link rel="icon" type="image/jpeg" href="images/favicon-si.ma.jpg">
+    <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" href="css/style.css?v=1734458000">
     <script src="js/main.js?v=21" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -127,8 +127,15 @@
                 
                 // Raccolta dati form
                 const formData = new FormData(form);
-                formData.append('department', department);
-                formData.append('departmentEmail', departmentEmail);
+                const data = {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    organization: formData.get('organization') || 'Non specificata',
+                    message: formData.get('message'),
+                    department: department,
+                    departmentEmail: departmentEmail
+                };
                 
                 // Disabilita il pulsante submit
                 const submitBtn = form.querySelector('button[type="submit"]');
@@ -136,10 +143,13 @@
                 submitBtn.disabled = true;
                 submitBtn.textContent = 'INVIO IN CORSO...';
                 
-                // Invia i dati al server PHP
-                fetch('send-email.php', {
+                // Invia i dati all'API Vercel
+                fetch('/api/send-email', {
                     method: 'POST',
-                    body: formData
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
                 })
                 .then(response => response.json())
                 .then(data => {
