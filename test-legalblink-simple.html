@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Legalblink Minimo</title>
+    <!-- Solo lo script Legalblink, NIENT'ALTRO -->
+    <script type="text/javascript" src="https://app.legalblink.it/api/scripts/lb_cs.js"></script>
+    <script id="lb_cs" type="text/javascript">lb_cs("6903b050190efd002845d26b");</script>
+</head>
+<body>
+    <h1>Test Legalblink Minimo</h1>
+    <p>Se Legalblink funziona, dovresti vedere il banner dei cookie.</p>
+    <p><strong>Dominio corrente:</strong> <span id="domain"></span></p>
+    
+    <div style="margin-top: 20px; padding: 20px; background: #f0f0f0;">
+        <h2>Console Debug:</h2>
+        <div id="debug"></div>
+    </div>
+    
+    <script>
+        // Mostra dominio
+        document.getElementById('domain').textContent = window.location.hostname;
+        
+        const debug = document.getElementById('debug');
+        
+        function log(msg) {
+            console.log(msg);
+            debug.innerHTML += msg + '<br>';
+        }
+        
+        log('🌍 Dominio: ' + window.location.hostname);
+        log('🔗 URL completo: ' + window.location.href);
+        log('📦 lb_cs function: ' + (typeof lb_cs !== 'undefined' ? '✅ Caricato' : '❌ NON caricato'));
+        
+        // Controlla dopo 3 secondi
+        setTimeout(() => {
+            log('--- Dopo 3 secondi ---');
+            const allElements = document.querySelectorAll('*');
+            let lbFound = 0;
+            allElements.forEach(el => {
+                if (el.id && el.id.includes('lb')) {
+                    log('✅ Trovato elemento con ID: ' + el.id);
+                    lbFound++;
+                }
+                if (el.className && el.className.toString().includes('lb')) {
+                    log('✅ Trovato elemento con class: ' + el.className);
+                    lbFound++;
+                }
+            });
+            
+            if (lbFound === 0) {
+                log('❌ NESSUN elemento Legalblink trovato nel DOM');
+                log('🔍 Possibili cause:');
+                log('  1. Dominio non autorizzato su Legalblink');
+                log('  2. ID progetto errato');
+                log('  3. Progetto non configurato correttamente');
+            } else {
+                log('✅ Trovati ' + lbFound + ' elementi Legalblink');
+            }
+            
+            // Controlla errori di rete
+            log('📡 Controlla la tab Network per errori 401/403');
+        }, 3000);
+    </script>
+</body>
+</html>
