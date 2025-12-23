@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="css/style.css?v=1734457000">
     <!-- Legalblink Cookie Solution Script -->
     <script type="text/javascript">
+        // DEBUG: Cancella cookies Legalblink per testare
+        document.cookie.split(";").forEach(function(c) { 
+            if (c.trim().startsWith('lb_')) {
+                document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+                console.log('🗑️ Rimosso cookie:', c.trim().split('=')[0]);
+            }
+        });
+        
         // Load Legalblink script dynamically
         (function() {
             var script = document.createElement('script');
@@ -19,6 +27,15 @@
                     try {
                         lb_cs("6903b050190efd002845d26b");
                         console.log('✅ Legalblink inizializzato con ID: 6903b050190efd002845d26b');
+                        // Forza visualizzazione del banner per test
+                        setTimeout(function() {
+                            console.log('🔍 Cerco elementi Legalblink nel DOM...');
+                            var lbElements = document.querySelectorAll('[class*="lb"], [id*="lb"]');
+                            console.log('📦 Elementi Legalblink trovati:', lbElements.length);
+                            lbElements.forEach(function(el) {
+                                console.log('  -', el.tagName, el.className || el.id);
+                            });
+                        }, 2000);
                     } catch(e) {
                         console.error('❌ Errore inizializzazione Legalblink:', e);
                     }
