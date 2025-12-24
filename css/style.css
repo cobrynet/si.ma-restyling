@@ -2459,11 +2459,20 @@ footer {
 }
 
 /* Legalblink Cookie Banner - Assicura che sia sempre sopra tutto */
-[id*="lb-cs"],
-[class*="lb-cs"],
 [id*="legalblink"],
-[class*="legalblink"] {
+[class*="legalblink"],
+#lb-cs-banner,
+.lb-cs-banner,
+#lb-cs-overlay,
+.lb-cs-overlay {
     z-index: 999999 !important;
+}
+
+
+/* Link "Aggiorna preferenze cookie" - SEMPRE sotto il banner Legalblink */
+.lb-cs-settings-link,
+.mobile-footer-cookie-settings {
+    z-index: 1 !important;
 }
 
 /* Modal Legalblink sempre in primo piano */
